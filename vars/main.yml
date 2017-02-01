@@ -1,10 +1,13 @@
 ---
 # path of the generated project
-project_path: "{{bpath | default('/mnt/ansible_project/')}}"
+project_path: "{{bpath | default('/tmp/ansible_project/')}}"
 
 # path of the 'roles' folder
 roles_path: "{{project_path}}/roles/"
 
 # name of the role
 generated_role_name: "{{brole | default('common')}}"
+
+# name of the Galaxy Role to install
+galaxy_roles: "{{bgalaxy | default('ewypych.ansible_template')}}"
 ...

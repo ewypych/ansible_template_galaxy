@@ -4,6 +4,14 @@
     path: "{{project_path}}"
     state: directory
 
+- name: Create group and host vars folders
+  file:
+    path: "{{project_path}}/{{item}}"
+    state: directory
+  with_items:
+    - group_vars
+    - host_vars
+
 - name: Create roles folder
   file:
     path: "{{roles_path}}/{{generated_role_name}}"
@@ -28,25 +36,31 @@
     - tasks
     - files
     - vars
-    - template
+    - templates
     - handlers
     - defaults
     - meta
-  tags:
-   trole
+  tags: [trole]
 
 - name: Copy the empty main.yml
-  copy:
+  template:
      src: main.yml
-     dest: "{{roles_path}}/{{generated_role_name}}/{{item}}/"
+     dest: "{{roles_path}}/{{generated_role_name}}/{{item}}"
   with_items:
     - tasks
-    - files
     - vars
-    - template
     - handlers
     - defaults
     - meta
-  tags:
-   trole
+  tags: [trole]
+
+- name: Copy template file
+  copy:
+    src: main.j2
+    dest: "{{roles_path}}/{{generated_role_name}}/templates/main.j2"
+  tags: [trole]
+
+- name: Install Galaxy Ansible 
+  shell: ansible-galaxy install {{item}} -p {{roles_path}}
+  with_items: "{{galaxy_roles}}"
 ...

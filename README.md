@@ -25,7 +25,7 @@ none
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+You can change variables in the vars/main.yml file or edit your site.yml file with the following:
 
 ```
 - hosts: localhost
@@ -39,6 +39,14 @@ Also you can install more Galaxy Roles than one, for example:
 - hosts: localhost
   roles:
     - { role: ewypych.project_template, bpath: '/home/usr/devops-project', brole: 'samplerole', bgalaxy: ['ewypych.ansible_template', 'boufnichel.project_template'] }
+```
+
+or create more than one empty role:
+
+```
+- hosts: localhost
+  roles:
+    - { role: ewypych.project_template, bpath: '/home/usr/devops-project', brole: ['samplerole', 'anotherrole'], bgalaxy: 'ewypych.ansible_template'}
 ```
 
 License
@@ -55,7 +63,9 @@ This Role was created as a fork of the [boufnichel.project_template](https://gal
 
 Author Information
 ------------------
-[Emil Wypych](https://emilwypych.com)
+[Emil Wypych](https://emilwypych.com), e-mail: [@gmail](wypychemil@gmail.com)
+
+Author of the boufnichel.project_template: [Mohamed Boufnichel](https://github.com/boufnichel)
 
 
 
